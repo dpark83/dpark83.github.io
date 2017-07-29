@@ -1,0 +1,136 @@
+<html>
+	<head>
+		<title>Library Locations with Argon + A-Frame</title>
+		<meta name="description" content="Library Locations with Argon + A-Frame">
+		<script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>    
+		<script src="https://unpkg.com/@argonjs/argon@^1.2/dist/argon.js"></script>
+		<script src="https://rawgit.com/argonjs/argon-aframe/master/dist/argon-aframe.js"></script>
+		<script src="../resources/lib/CSS3DArgonRenderer.js"></script>
+		<script src="../resources/lib/CSS3DArgonHUD.js"></script>
+		<script src="../resources/js/aframe-look-at-component.js"></script>
+		<link rel="stylesheet" href="../resources/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="../resources/style.css">
+	</head>
+	<body>
+		<script>
+AFRAME.registerComponent( 'showdistance', {
+	schema: { 
+		default: ""
+	},
+
+	init: function ( ) {
+		this.text = "";
+	},
+
+	update: function ( ) {
+		this.text = this.data;
+	},
+
+	tick: function ( t ) {
+		var object3D = this.el.parentEl.parentEl.object3D;
+		var camera = this.el.sceneEl.camera;
+		if ( !camera ) {
+			return;
+		}
+
+		var cameraPos = camera.getWorldPosition( );
+		var thisPos = object3D.getWorldPosition( );
+		var distance = Math.round( thisPos.distanceTo( cameraPos ) );
+
+		var cssDiv = this.el.getObject3D( 'div' );
+		var msg = this.text + distance + " meters away";
+		cssDiv.elements[ 0 ].innerHTML = msg;
+		cssDiv.elements[ 1 ].innerHTML = msg;
+	}
+});
+		</script>
+		<div hidden>
+			<div id="bediv" class="label">Beenleigh Library</div>
+			<div id="gbdiv" class="label">Greenbank Library</div>
+			<div id="jmdiv" class="label">Jimboomba Library</div>
+			<div id="lcdiv" class="label">Logan Central Library</div>
+			<div id="lhdiv" class="label">Logan Hyperdome Library</div>
+			<div id="lndiv" class="label">Logan North Library</div>
+			<div id="lvdiv" class="label">Logan Village Library</div>
+			<div id="lwdiv" class="label">Logan West Library</div>
+			<div id="madiv" class="label">Marsden Library</div>
+			<div id="bepin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+			<div id="gbpin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+			<div id="jmpin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+			<div id="lcpin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+			<div id="lhpin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+			<div id="lnpin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+			<div id="lvpin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+			<div id="lwpin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+			<div id="mapin" class="pin"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+		</div>
+<!--
+BE 153.201085 -27.718081
+GB 152.983649 -27.730814
+JM 153.026274 -27.829772
+LC 153.111412 -27.642814
+LH 153.171506 -27.655714
+LN 153.119231 -27.61106
+LV 153.106117 -27.767405
+LW 153.042738 -27.665311
+MA 153.11815 -27.67856
+
+-->
+		<ar-scene>
+			<ar-geopose id="be" lla="153.201085 -27.718081" userotation="false"> 
+				<a-entity fixedsize="20" billboard>
+					<a-entity css-object="div: #bepin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
+					<a-entity css-object="div: #bediv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="Beenleigh Library<br>It is "></a-entity>
+				</a-entity>
+			</ar-geopose>
+			<ar-geopose id="gb" lla="152.983649 -27.730814" userotation="false"> 
+				<a-entity fixedsize="20" billboard>
+					<a-entity css-object="div: #gbpin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
+					<a-entity css-object="div: #gbdiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="Greenbank Library<br>It is "></a-entity>
+				</a-entity>
+			</ar-geopose>
+			<ar-geopose id="jm" lla="153.026274 -27.829772" userotation="false"> 
+				<a-entity fixedsize="20" billboard>
+					<a-entity css-object="div: #jmpin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
+					<a-entity css-object="div: #jmdiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="Jimboomba Library<br>It is "></a-entity>
+				</a-entity>
+			</ar-geopose>
+			<ar-geopose id="lc" lla="153.111412 -27.642814" userotation="false"> 
+				<a-entity fixedsize="20" billboard>
+					<a-entity css-object="div: #lcpin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
+					<a-entity css-object="div: #lcdiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="Logan Central Library<br>It is "></a-entity>
+				</a-entity>
+			</ar-geopose>
+			<ar-geopose id="lh" lla="153.171506 -27.655714" userotation="false"> 
+				<a-entity fixedsize="20" billboard>
+					<a-entity css-object="div: #lhpin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
+					<a-entity css-object="div: #lhdiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="Logan Hyperdome Library<br>It is "></a-entity>
+				</a-entity>
+			</ar-geopose>
+			<ar-geopose id="ln" lla="153.119231 -27.61106" userotation="false"> 
+				<a-entity fixedsize="20" billboard>
+					<a-entity css-object="div: #lnpin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
+					<a-entity css-object="div: #lndiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="Logan North Library<br>It is "></a-entity>
+				</a-entity>
+			</ar-geopose>
+			<ar-geopose id="lv" lla="153.106117 -27.767405" userotation="false"> 
+				<a-entity fixedsize="20" billboard>
+					<a-entity css-object="div: #lvpin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
+					<a-entity css-object="div: #lvdiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="Logan Village Library<br>It is "></a-entity>
+				</a-entity>
+			</ar-geopose>
+			<ar-geopose id="lw" lla="153.042738 -27.665311" userotation="false"> 
+				<a-entity fixedsize="20" billboard>
+					<a-entity css-object="div: #lwpin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
+					<a-entity css-object="div: #lwdiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="Logan West Library<br>It is "></a-entity>
+				</a-entity>
+			</ar-geopose>
+			<ar-geopose id="ma" lla="153.11815 -27.67856" userotation="false"> 
+				<a-entity fixedsize="20" billboard>
+					<a-entity css-object="div: #mapin" scale="0.05 0.05 0.05" position="0 0 0"></a-entity>
+					<a-entity css-object="div: #madiv" scale="0.02 0.02 0.02" position="0 3 0" showdistance="Marsden Library<br>It is "></a-entity>
+				</a-entity>
+			</ar-geopose>
+		</ar-scene>
+	</body>
+</html>
